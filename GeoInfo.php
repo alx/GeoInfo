@@ -1,5 +1,5 @@
 <?php
-class RawSource {
+class GeoInfo {
 
     static function Load() {
     }
