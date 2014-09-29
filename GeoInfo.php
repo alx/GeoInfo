@@ -60,6 +60,8 @@ class GeoInfo {
     }
 
     static function Settings() {
+      global $config;
+
       App::LoadClass ('Video');
       $db = Database::GetInstance();
 
@@ -126,6 +128,7 @@ class GeoInfo {
       <tr class="<?=$odd ? 'odd' : ''?>">
         <td class="video-title">
             <a href="<?=ADMIN?>/videos_edit.php?id=<?=$video->video_id?>" class="large"><?=$video->title?></a><br />
+            <img src="<?=$config->thumb_url?>/<?=$video->filename?>.jpg"/>
         </td>
         <td class="video-geoinfo">
           <form method="post">
