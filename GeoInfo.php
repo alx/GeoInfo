@@ -128,7 +128,7 @@ class GeoInfo {
       <tr class="<?=$odd ? 'odd' : ''?>">
         <td class="video-title">
             <a href="<?=ADMIN?>/videos_edit.php?id=<?=$video->video_id?>" class="large"><?=$video->title?></a><br />
-            <img src="<?=$config->thumb_url?>/<?=$video->filename?>.jpg"/>
+            <img src="<?=$config->thumb_url?>/<?=$video->filename?>.jpg" width="200px"/>
         </td>
         <td class="video-geoinfo">
           <form method="post">
