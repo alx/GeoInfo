@@ -3,18 +3,7 @@
 class GeoInfo {
 
     static function Load() {
-      Plugin::Attach ( 'video.get' , array( __CLASS__ , 'ExtendWithGeoinfo' ) );
     }
-
-    static function ExtendWithGeoinfo() {
-      global $id;
-      $geoinfo = GeoInfo::FromVideo($id);
-      if(isset($geoinfo)) {
-        $video->lat = $geoinfo->lat;
-        $video->long = $geoinfo->long;
-      }
-    }
-
 
     static function Info() {
         return array (
