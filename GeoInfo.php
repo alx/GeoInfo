@@ -7,8 +7,8 @@ class GeoInfo {
     }
 
     static function ExtendWithGeoinfo() {
-      global $video;
-      $geoinfo = GeoInfo::FromVideo($video->id);
+      global $id;
+      $geoinfo = GeoInfo::FromVideo($id);
       if(isset($geoinfo)) {
         $video->lat = $geoinfo->lat;
         $video->long = $geoinfo->long;
