@@ -3,7 +3,18 @@
 class GeoInfo {
 
     static function Load() {
+      Plugin::Attach ( 'video.get' , array( __CLASS__ , 'ExtendWithGeoinfo' ) );
     }
+
+    static function ExtendWithGeoinfo() {
+      global $video;
+      $geoinfo = GeoInfo::FromVideo($video->id);
+      if(isset($geoinfo)) {
+        $video->lat = $geoinfo->lat;
+        $video->long = $geoinfo->long;
+      }
+    }
+
 
     static function Info() {
         return array (
@@ -40,7 +51,7 @@ class GeoInfo {
     static function FromVideo($video_id) {
       $db = Database::GetInstance();
       $geoinfo = null;
-      $query = "SELECT * FROM " . DB_PREFIX . "geoinfo WHERE video_id = " . $video_id;
+      $query = "SELECT lat, long FROM " . DB_PREFIX . "geoinfo WHERE video_id = " . $video_id;
       $geoinfo_result = $db->Query ($query);
       $geoinfo = $db->FetchObj ($geoinfo_result);
       return $geoinfo;
