@@ -40,7 +40,7 @@ class GeoInfo {
     static function FromVideo($video_id) {
       $db = Database::GetInstance();
       $geoinfo = null;
-      $query = "SELECT lat, long FROM " . DB_PREFIX . "geoinfo WHERE video_id = " . $video_id;
+      $query = "SELECT `lat`, `long` FROM " . DB_PREFIX . "geoinfo WHERE `video_id` = " . $video_id;
       $geoinfo_result = $db->Query ($query);
       $geoinfo = $db->FetchObj ($geoinfo_result);
       return $geoinfo;
