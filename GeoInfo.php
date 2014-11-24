@@ -66,7 +66,7 @@ class GeoInfo {
       App::LoadClass ('Pagination');
 
       $url = HOST . "/cc-admin/plugins_settings.php?plugin=GeoInfo";
-      $records_per_page = 30;
+      $records_per_page = 50;
       $db = Database::GetInstance();
 
       if (isset ($_POST['geoinfo_action']) ) {
