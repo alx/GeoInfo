@@ -114,6 +114,28 @@ class GeoInfo {
 
 <h1>GeoInfo</h1>
 
+<script type="text/javascript" src="<?=$config->theme_url?>/js/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+  $('input.update').click( function(e) {
+    e.preventDefault();
+    var data = $(this).parents('form').serialize();
+    var map = $(this).parents('tr').find('.video-map');
+    $.ajax(window.location.href, {
+      type: "POST",
+      data: data
+      },
+      success: function( response ) {
+        map.html('<p>Refresh page to view map update</p>');
+      }
+    });
+    return false;
+  });
+
+});
+</script>
+
 <?php if ($total > 0): ?>
 <div class="block list">
   <table>
@@ -157,7 +179,7 @@ class GeoInfo {
             <input type="hidden" name="geoinfo_video_id" value="<?= $row->video_id ?>"/>
             <p><label for="geoinfo_lat">Latitude :</label><br><input name="geoinfo_lat" value="<?= $lat ?>" type="text"/></p>
             <p><label for="geoinfo_long">Longitude :</label><br><input name="geoinfo_long" value="<?= $long ?>" type="text"/></p>
-            <p><input value="Submit" type="submit"/></p>
+            <p><input class="update" value="Submit" type="submit"/></p>
           </form>
         </td>
         <td class="video-map">
