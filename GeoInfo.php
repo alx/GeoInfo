@@ -124,8 +124,7 @@ $(document).ready(function(){
     var map = $(this).parents('tr').find('.video-map');
     $.ajax(window.location.href, {
       type: "POST",
-      data: data
-      },
+      data: data,
       success: function( response ) {
         map.html('<p>Refresh page to view map update</p>');
       }
@@ -174,7 +173,7 @@ $(document).ready(function(){
             <img src="<?=$config->thumb_url?>/<?=$video->filename?>.jpg" width="200px"/>
         </td>
         <td class="video-geoinfo">
-          <form>
+          <form method="post">
             <input type="hidden" name="geoinfo_action" value="update"/>
             <input type="hidden" name="geoinfo_video_id" value="<?= $row->video_id ?>"/>
             <p><label for="geoinfo_lat">Latitude :</label><br><input name="geoinfo_lat" value="<?= $lat ?>" type="text"/></p>
