@@ -183,10 +183,10 @@ $(document).ready(function(){
           </form>
         </td>
         <td class="video-map">
-          <?php if(isset($geoinfo)) { ?>
+          <?php if(isset($geoinfo) && intval($lat) != 0 && intval($long) != 0) { ?>
           <img border="0" alt="Marker of video <?= $video->title ?>" src="<?= GeoInfo::MapUrl($geoinfo->geoinfo_id) ?>"></img>
           <?php } else { ?>
-          <p>Set geogephic informations to display map</p>
+          <p>Set geoinfo to display map</p>
           <?php } ?>
         </td>
       </tr>
