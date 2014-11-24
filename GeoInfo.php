@@ -106,7 +106,7 @@ class GeoInfo {
         }
 
         $query .= " LIMIT $start_record, $records_per_page";
-        $pagination = new Pagination ($url, $total, $records_per_page);
+        $pagination = new Pagination ($url, $total, $records_per_page, false);
 
         $result = $db->Query ($query);
         $total = $db->Count ($result);
