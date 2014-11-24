@@ -69,23 +69,25 @@ class GeoInfo {
       $db = Database::GetInstance();
 
       if (isset ($_POST['geoinfo_action']) ) {
-        
+
         if ($_POST['geoinfo_action'] == "update") {
 
-        $query = "SELECT * FROM " . DB_PREFIX . "geoinfo WHERE video_id = " . $_POST['geoinfo_video_id'];
-        $geoinfo_result = $db->Query ($query);
-        $geoinfo_count = $db->Count ($geoinfo_result);
+          $query = "SELECT * FROM " . DB_PREFIX . "geoinfo WHERE video_id = " . $_POST['geoinfo_video_id'];
+          $geoinfo_result = $db->Query ($query);
+          $geoinfo_count = $db->Count ($geoinfo_result);
 
-        if($geoinfo_count == 0) {
-          $query = "INSERT INTO " . DB_PREFIX . "geoinfo (`video_id`, `lat`, `long`) VALUES (";
-          $query .= $_POST['geoinfo_video_id'] . ', ' . $_POST['geoinfo_lat'] . ', ' . $_POST['geoinfo_long'] . ')';
-          $db->Query ($query);
-        } else {
-          $query = "UPDATE " . DB_PREFIX . "geoinfo SET ";
-          $query .= "`lat` = " . $_POST['geoinfo_lat'] . ", ";
-          $query .= "`long` = " . $_POST['geoinfo_long'] . " ";
-          $query .= "WHERE `video_id` = " . $_POST['geoinfo_video_id'];
-          $db->Query ($query);
+          if($geoinfo_count == 0) {
+            $query = "INSERT INTO " . DB_PREFIX . "geoinfo (`video_id`, `lat`, `long`) VALUES (";
+            $query .= $_POST['geoinfo_video_id'] . ', ' . $_POST['geoinfo_lat'] . ', ' . $_POST['geoinfo_long'] . ')';
+            $db->Query ($query);
+          } else {
+            $query = "UPDATE " . DB_PREFIX . "geoinfo SET ";
+            $query .= "`lat` = " . $_POST['geoinfo_lat'] . ", ";
+            $query .= "`long` = " . $_POST['geoinfo_long'] . " ";
+            $query .= "WHERE `video_id` = " . $_POST['geoinfo_video_id'];
+            $db->Query ($query);
+          }
+
         }
 
       } else {
@@ -97,8 +99,10 @@ class GeoInfo {
         if(isset($_GET['page'])) {
           $start_record = intval($_GET['page']) * $records_per_page;
         }
+
         $query .= " LIMIT $start_record, $records_per_page";
         $pagination = new Pagination ($url, $total, $records_per_page);
+
         $result = $db->Query ($query);
         $total = $db->Count ($result);
 ?>
