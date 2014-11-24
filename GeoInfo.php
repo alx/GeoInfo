@@ -174,7 +174,7 @@ $(document).ready(function(){
             <img src="<?=$config->thumb_url?>/<?=$video->filename?>.jpg" width="200px"/>
         </td>
         <td class="video-geoinfo">
-          <form method="post">
+          <form>
             <input type="hidden" name="geoinfo_action" value="update"/>
             <input type="hidden" name="geoinfo_video_id" value="<?= $row->video_id ?>"/>
             <p><label for="geoinfo_lat">Latitude :</label><br><input name="geoinfo_lat" value="<?= $lat ?>" type="text"/></p>
