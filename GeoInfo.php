@@ -65,7 +65,7 @@ class GeoInfo {
       App::LoadClass ('Video');
       App::LoadClass ('Pagination');
 
-      $url = HOST . "/cc-admin/plugins_settings.php?plugin=GeoInfo"
+      $url = HOST . "/cc-admin/plugins_settings.php?plugin=GeoInfo";
       $records_per_page = 30;
       $db = Database::GetInstance();
 
