@@ -63,9 +63,14 @@ class GeoInfo {
       global $config;
 
       App::LoadClass ('Video');
+      App::LoadClass ('Pagination');
+
+      $records_per_page = 30;
       $db = Database::GetInstance();
 
-      if (isset ($_POST['geoinfo_action']) &&  $_POST['geoinfo_action'] == "update") {
+      if (isset ($_POST['geoinfo_action']) ) {
+        
+        if ($_POST['geoinfo_action'] == "update") {
 
         $query = "SELECT * FROM " . DB_PREFIX . "geoinfo WHERE video_id = " . $_POST['geoinfo_video_id'];
         $geoinfo_result = $db->Query ($query);
@@ -83,12 +88,19 @@ class GeoInfo {
           $db->Query ($query);
         }
 
-      }
+      } else {
 
-      $query = "SELECT video_id FROM " . DB_PREFIX . "videos WHERE status = 'approved'";
-      $query .= " ORDER BY video_id DESC";
-      $result = $db->Query ($query);
-      $total = $db->Count ($result);
+        $query = "SELECT video_id FROM " . DB_PREFIX . "videos WHERE status = 'approved'";
+        $query .= " ORDER BY video_id DESC";
+
+        $start_record = 0;
+        if(isset($_GET['page'])) {
+          $start_record = intval($_GET['page']) * $records_per_page;
+        }
+        $query .= " LIMIT $start_record, $records_per_page";
+        $pagination = new Pagination ($url, $total, $records_per_page);
+        $result = $db->Query ($query);
+        $total = $db->Count ($result);
 ?>
 
 <h1>GeoInfo</h1>
@@ -150,12 +162,16 @@ class GeoInfo {
       <?php endwhile; ?>
     </tbody>
   </table>
+  <div class="row">
+    <div class="col-md-12 paginate"><?=$pagination->Paginate()?></div>
+  </div>
 </div>
 <?php else: ?>
 <div class="block"><strong>No videos found</strong></div>
 <?php endif; ?>
 
 <?php
+      }
     }
 }
 ?>
