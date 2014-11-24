@@ -65,6 +65,7 @@ class GeoInfo {
       App::LoadClass ('Video');
       App::LoadClass ('Pagination');
 
+      $url = HOST . "/cc-admin/plugins_settings.php?plugin=GeoInfo"
       $records_per_page = 30;
       $db = Database::GetInstance();
 
@@ -93,6 +94,10 @@ class GeoInfo {
       } else {
 
         $query = "SELECT video_id FROM " . DB_PREFIX . "videos WHERE status = 'approved'";
+
+        $result_count = $db->Query ($query);
+        $total = $db->Count ($result_count);
+
         $query .= " ORDER BY video_id DESC";
 
         $start_record = 0;
